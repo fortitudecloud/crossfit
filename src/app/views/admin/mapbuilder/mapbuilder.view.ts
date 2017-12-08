@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MapBuilderViewComponent implements OnInit {
 
-    title: string = 'My first AGM project';
+    title: string = 'Bright fitbit apple watch';
     zoom: number = 12;
     lat: number = 51.678418;
     lng: number = 7.809007;
