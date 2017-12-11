@@ -1,9 +1,25 @@
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
 import { Observable } from 'rxjs';
 import { IProvider, IData, IQuery } from 'grapple';
+import { Injectable }     from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { environment } from '../../environments/environment';
+
+@Injectable()
+export class RestService {
+
+    constructor (private http: Http) { }
+    
+    get<D extends IData>(resource: string): IProvider<D> {
+        return new RestProvider<D>(this.http, resource);
+    }
+}
 
 export class RestProvider<D extends IData> implements IProvider<D> {
 
-    constructor() { }
+    constructor(private http: Http, private resource: string) { }
 
     add(data: D): Observable<D> {
         throw new Error("Method not implemented.");
