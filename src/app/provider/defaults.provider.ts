@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Defaults {
-    MAP_ZOOM: 12;
+    MAP_ZOOM = 12;
     MAP_STYLES = [
         {
             "featureType": "administrative",

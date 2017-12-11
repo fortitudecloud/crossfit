@@ -2,8 +2,8 @@
     *ngIf="ready"
     [latitude]="map.origin.lat" 
     [longitude]="map.origin.lng" 
-    [styles]="defaults.MAP_STYLES" 
-    [zoom]="defaults.MAP_ZOOM"
+    [styles]="styles" 
+    [zoom]="zoom"
     (mapClick)="mapClicked($event)">
 
     <agm-marker 

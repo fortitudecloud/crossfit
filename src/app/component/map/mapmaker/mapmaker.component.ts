@@ -3,19 +3,27 @@ import { IMap, IMapEvent } from '../../../interface/map.interface';
 import { Defaults } from '../../../provider/defaults.provider';
 
 @Component({
-    styleUrls: ['./mapbuilder.view.scss'],
-    templateUrl: './mapbuilder.view.html'
+    selector: 'map-maker',
+    styleUrls: ['./mapmaker.component.scss'],
+    templateUrl: './mapmaker.component.html'
 })
 export class MapMakerComponent implements OnInit {
 
     ready: boolean = false; 
+    styles: any;
+    zoom: number;
     
     @Input() map: IMap;
 
-    constructor(private defaults: Defaults) {}
+    constructor(private defaults: Defaults) {
+        this.styles = defaults.MAP_STYLES;
+        this.zoom = defaults.MAP_ZOOM;
+    }
 
     ngOnInit(): void {
-        if(this.map) this.ready = true;
+        if(this.map) window.setTimeout(() => {
+            this.ready = true;
+        });
     }
 
     clickedMarker(label: string, index: number) {
