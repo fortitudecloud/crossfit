@@ -13,6 +13,9 @@ import { AppComponent } from './app.component';
 // Views
 import { MapBuilderViewComponent } from './views/admin/mapbuilder/mapbuilder.view';
 
+// Providers
+import { Defaults } from './provider/defaults';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { MapBuilderViewComponent } from './views/admin/mapbuilder/mapbuilder.vie
       apiKey: 'AIzaSyBCVJPfwKSgIrz0VWZDL6LNUWMK7M6oR_w'
     })
   ],
-  providers: [],
+  providers: [
+      Defaults
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

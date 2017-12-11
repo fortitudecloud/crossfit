@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IMap } from '../../../interface/map.interface';
 
 @Component({
     styleUrls: ['./mapbuilder.view.scss'],
@@ -10,7 +11,18 @@ export class MapBuilderViewComponent implements OnInit {
     zoom: number = 12;
     lat: number = 51.678418;
     lng: number = 7.809007;
-    ready: boolean = false;    
+    ready: boolean = false; 
+    
+    map: IMap = {
+        name: 'Steps Map',
+        description: 'Basic map for stepping around',
+        origin: {
+            lat: 51.678418,
+            lng: 7.809007,
+            alias: 'base'
+        },
+        event: []
+    };
 
     constructor() {}
 
@@ -29,11 +41,19 @@ export class MapBuilderViewComponent implements OnInit {
     }
     
     mapClicked($event: MouseEvent) {
-        this.markers.push({
-            lat: (<any>$event).coords.lat,
-            lng: (<any>$event).coords.lng,
-            draggable: false,
-            label: ''
+        // this.markers.push({
+        //     lat: (<any>$event).coords.lat,
+        //     lng: (<any>$event).coords.lng,
+        //     draggable: false,
+        //     label: ''
+        // });
+        this.map.event.push({
+            name: 'New Event',
+            description: 'Some event on the map',
+            location: {
+                lat: (<any>$event).coords.lat,
+                lng: (<any>$event).coords.lng,
+            }
         });
     }
     
