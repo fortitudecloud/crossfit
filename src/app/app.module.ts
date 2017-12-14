@@ -23,15 +23,19 @@ import { ViewGroupDirective } from './directives/view-group.directive';
 
 // Views
 import { MapBuilderViewComponent } from './views/admin/mapbuilder/mapbuilder.view';
+import { LandingViewComponent } from './views/client/landing/landing.view';
+import { HomeViewComponent } from './views/client/home/home.view';
 
 // Providers
 import { Defaults } from './provider/defaults.provider';
+import { FitbitProvider } from './provider/stub/fitbit.stub.provider'; // ! stub
 
 
 @NgModule({
   declarations: [
     // Components
-    AppComponent, MapBuilderViewComponent, ViewComponent, MapMakerComponent,
+    AppComponent, MapBuilderViewComponent, ViewComponent, MapMakerComponent, LandingViewComponent,
+    HomeViewComponent,
     // Directives
     ViewGroupDirective
   ],
@@ -48,7 +52,7 @@ import { Defaults } from './provider/defaults.provider';
     routing
   ],
   providers: [
-      Defaults
+      Defaults, FitbitProvider
   ],
   bootstrap: [AppComponent]
 })

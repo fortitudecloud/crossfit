@@ -32,6 +32,7 @@ export class MapMakerComponent implements OnInit {
     
     mapClicked($event: MouseEvent) {        
         this.map.event.push({
+            id: 'event' + Math.floor(Math.random() * 1000),
             name: 'New Event',
             description: 'Some event on the map',
             location: {

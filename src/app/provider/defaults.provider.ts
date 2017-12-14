@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IUserAuthProvider } from '../interface/user.interface';
 
 @Injectable()
 export class Defaults {
@@ -83,4 +84,35 @@ export class Defaults {
             ]
         }
     ];
+    TESTUSERS = [{
+        username: 'Lionel',
+        firstname: 'Lionel',
+        lastname: 'Hickey',
+        displayname: 'Lionel',
+        avatar: '',
+        auth: {
+            provider: IUserAuthProvider.Fitbit,
+            accessToken: 'token',
+            refreshToken: 'refresh',
+            expires: new Date()
+        },
+        steps: [{
+            date: new Date(),
+            day: +(new Date().getDate()),
+            month: +(new Date().getMonth()),
+            year: +(new Date().getFullYear()),            
+            steps: 2211
+        }]
+    }];
+    TESTMAPS = [{
+        id: 'aa121',
+        name: 'Bright Step Challenge',
+        description: 'New years 2017 step challenge. Allows Apple Watch and Fitbit contestants',
+        origin: {
+            lat: -36.730199,
+            lng: 146.960896,
+            alias: 'base'
+        },
+        event: []
+    }];
 }

@@ -1,0 +1,32 @@
+[view-body] {
+    background: url(../../../../assets/yosemite.jpg);
+    background-size: cover;
+}
+
+.page {
+    background-color: rgba(255, 255, 255, 0.59);
+}
+
+.buttons {
+    padding: 50px 10px;
+}
+
+.star {
+    font-size: 60px;
+    color: #fff908;
+    border-radius: 50%;
+    background-color: #bfaa12;
+    margin: 20px;
+}
+
+h3 {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+button {
+    margin: 10px 0;
+    padding: 20px 0;
+}

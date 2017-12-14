@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMap } from '../../../interface/map.interface';
+import { Defaults } from '../../../provider/defaults.provider';
 
 import { MatTabGroup } from '@angular/material/tabs';
 import { MatTableDataSource } from '@angular/material';
@@ -28,16 +29,7 @@ export class MapBuilderViewComponent implements OnInit {
     //     event: []
     // };
 
-    maps: IMap[] = [{
-        name: 'Bright Step Challenge',
-        description: 'New years 2017 step challenge. Allows Apple Watch and Fitbit contestants',
-        origin: {
-            lat: -36.730199,
-            lng: 146.960896,
-            alias: 'base'
-        },
-        event: []
-    }];
+    maps: IMap[];
     selectedMap: number = 0;
 
     editMode: boolean = false;
@@ -45,7 +37,9 @@ export class MapBuilderViewComponent implements OnInit {
     displayedColumns = ['name', 'description'];
     dataSource = new MatTableDataSource<IMap>(this.maps);
 
-    constructor() {}
+    constructor(private defaults: Defaults) {
+        this.maps = defaults.TESTMAPS;
+    }
 
     ngOnInit(): void {
         // navigator.geolocation.getCurrentPosition((position) => {
@@ -58,7 +52,7 @@ export class MapBuilderViewComponent implements OnInit {
     }
 
     mapEdit(map: IMap) {        
-        let index = this.maps.findIndex(m => m.name === map.name);
+        let index = this.maps.findIndex(m => m.id === map.id);
         this.selectedMap = index;
         this.viewGroup.selectedIndex = 1;
         window.setTimeout(() => {

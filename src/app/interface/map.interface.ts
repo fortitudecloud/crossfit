@@ -1,4 +1,6 @@
 export interface IMap {
+    /** identifier */
+    id: string;
     /** map name */
     name: string;
     /** desciption of map implementation */
@@ -10,6 +12,8 @@ export interface IMap {
 }
 
 export interface IMapEvent {
+    /** identifier */
+    id: string;
     /** map event name */
     name: string;
     /** map event description */
