@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 
 // Routing
@@ -12,6 +12,9 @@ import { routing } from './app.route';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 // Components
 import { AppComponent } from './app.component';
@@ -41,13 +44,14 @@ import { FitbitProvider } from './provider/stub/fitbit.stub.provider'; // ! stub
   ],
   imports: [
     // Angular
-    BrowserModule, CommonModule, FormsModule, BrowserAnimationsModule,
+    BrowserModule, CommonModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule,
     // Maps
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBCVJPfwKSgIrz0VWZDL6LNUWMK7M6oR_w'
     }),
     // Material
-    MatProgressBarModule, MatTabsModule, MatTableModule,
+    MatProgressBarModule, MatTabsModule, MatTableModule, MatFormFieldModule, MatSelectModule,
+    MatInputModule,
     // App 
     routing
   ],

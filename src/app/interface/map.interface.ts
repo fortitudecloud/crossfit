@@ -22,6 +22,8 @@ export interface IMapEvent {
     location: IMapLocation;
     /** area of effect of event */
     radius?: number;
+    /** type of event */
+    type: IMapEventType;
 }
 
 export interface IMapLocation {
@@ -31,4 +33,10 @@ export interface IMapLocation {
     lng: number;
     /** alias name */
     alias?: string;    
+}
+
+export enum IMapEventType {
+    CHECKIN = 1,
+    COLLECTABLE,
+    SPECIAL
 }

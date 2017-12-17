@@ -35,10 +35,11 @@ export class MapBuilderViewComponent implements OnInit {
     editMode: boolean = false;
 
     displayedColumns = ['name', 'description'];
-    dataSource = new MatTableDataSource<IMap>(this.maps);
+    dataSource: MatTableDataSource<IMap>;
 
     constructor(private defaults: Defaults) {
         this.maps = defaults.TESTMAPS;
+        this.dataSource = new MatTableDataSource<IMap>(this.maps);
     }
 
     ngOnInit(): void {

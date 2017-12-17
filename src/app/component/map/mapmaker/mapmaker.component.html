@@ -10,13 +10,32 @@
         *ngFor="let m of map.event; let i = index"
         (markerClick)="clickedMarker('New Event', i)"
         [latitude]="m.location.lat"
-        [longitude]="m.location.lng"
-        [label]="m.name"
+        [longitude]="m.location.lng"        
         [markerDraggable]="false"
-        (dragEnd)="markerDragEnd(m, $event)"></agm-marker>
-
-    <agm-info-window>
-        <strong>InfoWindow content</strong>
-    </agm-info-window>
+        (dragEnd)="markerDragEnd(m, $event)">
+    
+        <agm-info-window *ngIf="eventForm.controls[i]">   
+            <form [formGroup]="eventForm.controls[i]">
+                <div flex column>
+                    <h4>Map event</h4>
+                    <mat-form-field>
+                        <input matInput placeholder="Name" formControlName="name" [(ngModel)]="m.name">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Description" formControlName="description" [(ngModel)]="m.description">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-select placeholder="Event Type" formControlName="type" [(ngModel)]="m.type">
+                            <mat-option *ngFor="let type of eventTypes" [value]="type.key">
+                            {{ type.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button (click)="removeEvent(i)">Remove</button>
+                </div>       
+            </form>
+        </agm-info-window>
+    
+    </agm-marker>    
 
 </agm-map>
