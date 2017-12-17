@@ -16,7 +16,7 @@ export class MapBuilderViewComponent implements OnInit {
     // zoom: number = 12;
     // lat: number = 51.678418;
     // lng: number = 7.809007;
-    ready: boolean = false; 
+    ready: boolean = false;     
     
     // map: IMap = {
     //     name: 'Steps Map',
@@ -31,6 +31,7 @@ export class MapBuilderViewComponent implements OnInit {
 
     maps: IMap[];
     selectedMap: number = 0;
+    activeMap: IMap;
 
     editMode: boolean = false;
 
@@ -56,8 +57,18 @@ export class MapBuilderViewComponent implements OnInit {
         let index = this.maps.findIndex(m => m.id === map.id);
         this.selectedMap = index;
         this.viewGroup.selectedIndex = 1;
+        this.activeMap = map;
         window.setTimeout(() => {
             this.editMode = true;
+        });        
+    }
+
+    saveMap() {
+        this.defaults.TESTMAPS = <any>this.maps;
+        this.viewGroup.selectedIndex = 0;
+        this.activeMap = undefined;
+        window.setTimeout(() => {
+            this.editMode = false;
         });        
     }
 

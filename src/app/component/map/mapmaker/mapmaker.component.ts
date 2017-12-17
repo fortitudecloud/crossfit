@@ -38,11 +38,13 @@ export class MapMakerComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if(this.map) window.setTimeout(() => {
-            this.ready = true;
-        });
+        this.eventForm = new FormArray([]);  
 
-        this.eventForm = new FormArray([]);        
+        if(this.map) window.setTimeout(() => {
+            this.map.event.forEach(e => this.updateEventForm());
+
+            this.ready = true;
+        });        
     }
 
     clickedMarker(label: string, index: number) {

@@ -4,19 +4,30 @@
     [longitude]="map.origin.lng" 
     [styles]="styles" 
     [zoom]="zoom"
-    (mapClick)="mapClicked($event)">
+    (mapClick)="mapClicked($event)"
+    [style.height]="fullHeight"
+    [disableDefaultUI]="disabledUI">
 
     <agm-marker 
         *ngFor="let m of map.event; let i = index"
         (markerClick)="clickedMarker('New Event', i)"
         [latitude]="m.location.lat"
         [longitude]="m.location.lng"
-        [label]="m.name"
+        [iconUrl]="icons[m.type]"
         [markerDraggable]="false"
-        (dragEnd)="markerDragEnd(m, $event)"></agm-marker>
-
-    <agm-info-window>
-        <strong>InfoWindow content</strong>
-    </agm-info-window>
+        (dragEnd)="markerDragEnd(m, $event)">
+    
+            <agm-info-window>                   
+                <div flex column>
+                    <h4>{{m.name}}</h4>
+                    <label>{{m.description}}</label> 
+                    <div *ngIf="m.type == 1" flex row center>
+                        <strong *ngIf="m.type == 1">x3</strong>                   
+                    </div>                    
+                    <button class="primary" (click)="claimEvent(m)">Claim</button>
+                </div>                       
+            </agm-info-window>
+    
+    </agm-marker>    
 
 </agm-map>

@@ -1,7 +1,15 @@
 <grapple-view>
-    <div view-head>
-        <h4>Map Builder</h4>
-        <button *ngIf="editMode" color="primary">Save Map</button>
+    <div view-head flex row>
+        <div flex column center grow>
+            <h4 flex row>
+                <span *ngIf="!activeMap">Map Builder</span>
+                <i class="material-icons" *ngIf="activeMap">add_location</i>
+                <span *ngIf="activeMap">{{activeMap.name}}</span>
+            </h4>
+        </div>
+        <div flex column center end class="pad-w-10px">
+            <button *ngIf="editMode" class="primary" (click)="saveMap()">Save Map</button>
+        </div>        
     </div>
     <div flex column center grow view-body>
         <!-- Views -->

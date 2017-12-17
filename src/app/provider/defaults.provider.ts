@@ -3,7 +3,7 @@ import { IUserAuthProvider } from '../interface/user.interface';
 
 @Injectable()
 export class Defaults {
-    MAP_ZOOM = 12;
+    MAP_ZOOM = 14;
     MAP_STYLES = [
         {
             "featureType": "administrative",
@@ -113,6 +113,6 @@ export class Defaults {
             lng: 146.960896,
             alias: 'base'
         },
-        event: []
+        event: [{"id":"event736","name":"Watering Hole","description":"Hoggies favorite splash zone. Give him a dip if you like","location":{"lat":-36.72782660096826,"lng":146.99951648712158},"type":3},{"id":"event873","name":"Top of the town","description":"Power up! Good for 3k steps","location":{"lat":-36.73018269203475,"lng":146.96123600006104},"type":1},{"id":"event359","name":"Poker Challenge","description":"Collect here","location":{"lat":-36.73723333556389,"lng":146.97067737579346},"type":2}]
     }];
 }

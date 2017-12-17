@@ -1,6 +1,24 @@
 <grapple-view>
     <div flex column center grow view-body>
-        <h4>show map and avator with steps</h4>
-        <a href="https://dribbble.com/shots/3359925-Chat-Hang-App">Concept</a>
+        <!-- <h4>show map and avator with steps</h4>
+        <a href="https://dribbble.com/shots/3359925-Chat-Hang-App">Concept</a> -->
+
+        <map-viewer [map]="map" flex grow></map-viewer>
+        <div class="profile" flex column center>
+            <div flex row center>
+                <img src="./assets/hogs.png" />
+            </div>            
+            <label class="mt-60px">Lionel</label>
+            <label flex row center>
+                <span>10,344</span>
+                <span>15,664</span>                
+            </label>
+            <ul flex row>
+                <li fx-1>home</li>
+                <li fx-1>leaders</li>
+                <li fx-1>chat</li>
+                <li fx-1>collects</li>
+            </ul>
+        </div>
     </div>  
 </grapple-view>

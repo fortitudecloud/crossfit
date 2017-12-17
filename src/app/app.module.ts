@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AppComponent } from './app.component';
 import { ViewComponent } from './views/view.component';
 import { MapMakerComponent } from './component/map/mapmaker/mapmaker.component';
+import { MapViewerComponent } from './component/map/mapviewer/mapviewer.component';
 
 // Directives
 import { ViewGroupDirective } from './directives/view-group.directive';
@@ -38,7 +39,7 @@ import { FitbitProvider } from './provider/stub/fitbit.stub.provider'; // ! stub
   declarations: [
     // Components
     AppComponent, MapBuilderViewComponent, ViewComponent, MapMakerComponent, LandingViewComponent,
-    HomeViewComponent,
+    HomeViewComponent, MapViewerComponent,
     // Directives
     ViewGroupDirective
   ],
