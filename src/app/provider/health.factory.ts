@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IAuthProvider } from '../interface/auth.interface';
+import { IStepProvider } from '../interface/step.interface';
 import { IUserAuthProvider } from '../interface/user.interface';
 
 import { FitbitProvider } from './stub/fitbit.stub.provider';
@@ -9,7 +10,7 @@ export class HealthFactory {
 
     constructor(private fitbit: FitbitProvider) {}
 
-    getAuth(authProvider: IUserAuthProvider): IAuthProvider {
+    getAuth(authProvider: IUserAuthProvider): IHealthProvider {
         switch(authProvider) {
             case IUserAuthProvider.Fitbit:
                 return this.fitbit;                
@@ -19,3 +20,5 @@ export class HealthFactory {
     }
 
 }
+
+export interface IHealthProvider extends IAuthProvider, IStepProvider { }

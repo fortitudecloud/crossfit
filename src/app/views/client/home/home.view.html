@@ -23,7 +23,7 @@
         <mat-tab-group viewGroup>
             <!-- Home -->
             <mat-tab>
-                <div flex column center grow tab-body>
+                <div flex column center grow tab-body *ngIf="user">
                     <map-viewer [map]="map" [user]="testUser" flex grow></map-viewer>                    
                     <!-- Profile -->
                     <div class="profile" flex column center>
@@ -31,10 +31,16 @@
                             <img src="./assets/hogs.png" />
                         </div>            
                         <!-- <label class="mt-60px">Lionel</label> -->
-                        <label flex row center class="mt-70px">
-                            <span class="primary">10,344</span>
-                            <span class="secondary">15,664</span>                
-                        </label>                        
+                        <div flex row center>
+                            <label flex row start fx-1 class="primary">
+                                <!-- <small class="primary">Steps</small> -->
+                                <span>{{steps}}</span>                                
+                            </label>             
+                            <label flex row end fx-1 class="secondary">                                
+                                <!-- <small class="secondary">Bonus</small> -->
+                                <span>{{bonus}}</span>                
+                            </label>             
+                        </div>           
                     </div>
                 </div>
             </mat-tab>
@@ -42,6 +48,9 @@
             <mat-tab>
                 <div flex column center grow>
                     <h3>Leaders</h3>
+                    <div flex column grow>
+                        <leader-list></leader-list>
+                    </div>
                 </div>
             </mat-tab>
         </mat-tab-group>

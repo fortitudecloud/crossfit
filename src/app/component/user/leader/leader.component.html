@@ -1,0 +1,19 @@
+<div stat flex column center *ngFor="let l of leaders; let i = index">
+    <div flex row>
+        <h3 flex column center>{{i+1}}</h3>
+        <img src="./assets/hogs.png" />
+        <div flex column grow>
+            <label flex fx-1>
+                <span grow>Lionel</span>
+                <span class="primary">{{getStepsToday(l)}}</span>
+                <span class="secondary">UNKNOWN</span>
+            </label>
+            <div flex column center fx-1>
+                <mat-progress-bar mode="determinate" value="{{getStepPercent(l)}}" class="primary"></mat-progress-bar>
+            </div>
+            <div flex column center fx-1>
+                <mat-progress-bar mode="determinate" value="90.45345"></mat-progress-bar>
+            </div>                                    
+        </div>
+    </div>
+</div>

@@ -5,5 +5,5 @@ export interface IAuthProvider {
     /** starts authentication and returns a redirect URL  */
     auth(): string;
     /** get existing or fresh access tokens from the auth provider */
-    getTokens(): Observable<IUserAuth>;    
+    getTokens(code: string): Observable<IUserAuth>;    
 }

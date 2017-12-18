@@ -36,12 +36,50 @@ map-viewer {
         text-align: center;        
         text-transform: uppercase;
         font-weight: 600;
-        font-size: 18px;
+        font-size: 30px;
+        padding: 24px;
 
-        span {
-            text-transform: none;
-            font-weight: 300;
-            margin: 10px;
+        &.primary {
+            background-color: #56a8f1;
+            color: #eee;            
+        }
+
+        &.secondary {
+            background-color: #5661f1;
+            color: #eee;            
+        }
+
+        // span {
+        //     text-transform: none;
+        //     font-weight: 300;
+        //     margin: 10px;
+
+        //     &.primary {
+        //         color: #56a8f1;
+        //     }
+
+        //     &.secondary {
+        //         color: #5661f1;
+        //     }
+
+        //     b {
+        //         font-weight: 400;
+        //     }
+
+        //     small {
+        //         text-transform: uppercase;
+        //         font-size: 14px;
+        //         font-weight: 600;
+        //         letter-spacing: -1px;
+        //         border: 1px solid;
+        //         padding: 0 4px;
+        //         margin: 5px;
+        //     }
+        // }
+
+        small {
+            font-size: 12px;
+            letter-spacing: 1px;
 
             &.primary {
                 color: #56a8f1;

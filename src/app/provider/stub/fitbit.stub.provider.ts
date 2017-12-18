@@ -15,10 +15,10 @@ export class FitbitProvider implements IAuthProvider, IStepProvider {
         this.users = defaults.TESTUSERS;
     }
 
-    getUserInfo(user: IUser): Observable<IUser> {        
+    getUserInfo(userAuth: IUserAuth): Observable<IUser> {        
         // note: will go to fitbit api
         return new Observable(ob => {
-            ob.next(this.users.find(u => u.username === user.username));
+            ob.next(this.users.find(u => u.auth.accessToken === userAuth.accessToken));
             ob.complete();
         });
     }
@@ -37,18 +37,14 @@ export class FitbitProvider implements IAuthProvider, IStepProvider {
 
     auth(): string {
         // skip fitbit authentication process and pretend its happen
-        return environment.homeURL + '?code=098098asdfsafsd098';
+        return environment.fitbitApiUrl;
     }
 
-    getTokens(): Observable<IUserAuth> {
+    getTokens(code: string): Observable<IUserAuth> {
         // fake token collection        
         return new Observable(ob => {
-            ob.next({
-                provider: IUserAuthProvider.Fitbit,
-                accessToken: 'token',
-                refreshToken: 'refresh',
-                expires: new Date()
-            });
+            let auth = this.defaults.TESTUSERS[0].auth;
+            ob.next(auth);
             ob.complete();
         });
     }    

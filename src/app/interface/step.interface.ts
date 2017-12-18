@@ -3,7 +3,7 @@ import { IUser, IUserAuth, IUserStep } from './user.interface';
 
 export interface IStepProvider {
     /** get user info */
-    getUserInfo(user: IUser): Observable<IUser>;
+    getUserInfo(userAuth: IUserAuth): Observable<IUser>;
     /** gets the users steps for the current day */
     getTodaySteps(userAuth: IUserAuth): Observable<IUserStep>;
 }

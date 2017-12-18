@@ -21,6 +21,7 @@ import { AppComponent } from './app.component';
 import { ViewComponent } from './views/view.component';
 import { MapMakerComponent } from './component/map/mapmaker/mapmaker.component';
 import { MapViewerComponent } from './component/map/mapviewer/mapviewer.component';
+import { LeaderComponent } from './component/user/leader/leader.component';
 
 // Directives
 import { ViewGroupDirective } from './directives/view-group.directive';
@@ -29,17 +30,21 @@ import { ViewGroupDirective } from './directives/view-group.directive';
 import { MapBuilderViewComponent } from './views/admin/mapbuilder/mapbuilder.view';
 import { LandingViewComponent } from './views/client/landing/landing.view';
 import { HomeViewComponent } from './views/client/home/home.view';
+import { SetupViewComponent } from './views/client/setup/setup.view';
 
 // Providers
 import { Defaults } from './provider/defaults.provider';
 import { FitbitProvider } from './provider/stub/fitbit.stub.provider'; // ! stub
 import { DistanceProvider } from './provider/distance.provider';
+import { HealthFactory } from './provider/health.factory';
+import { UserStorage } from './provider/stub/storage/user.stub.storage'; // ! stub
+import { AchievementsProvider } from './provider/stub/achievements.stub.provider'; // ! stub
 
 @NgModule({
   declarations: [
     // Components
     AppComponent, MapBuilderViewComponent, ViewComponent, MapMakerComponent, LandingViewComponent,
-    HomeViewComponent, MapViewerComponent,
+    HomeViewComponent, MapViewerComponent, LeaderComponent, SetupViewComponent,
     // Directives
     ViewGroupDirective
   ],
@@ -57,7 +62,7 @@ import { DistanceProvider } from './provider/distance.provider';
     routing
   ],
   providers: [
-      Defaults, FitbitProvider, DistanceProvider
+      Defaults, FitbitProvider, DistanceProvider, HealthFactory, UserStorage, AchievementsProvider
   ],
   bootstrap: [AppComponent]
 })

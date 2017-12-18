@@ -234,6 +234,18 @@ button {
     margin-left: 20px;
 }
 
+mat-progress-bar {
+    &.primary {
+        .mat-progress-bar-buffer {
+            background-color: #c4dae9;
+        }
+
+        .mat-progress-bar-fill::after {
+            background-color: #58a3ed;
+        }
+    }
+}
+
 /****************/
 
 /*
