@@ -1,9 +1,6 @@
 <grapple-view>
     <div flex column center grow view-body>
-        <!-- <h4>show map and avator with steps</h4>
-        <a href="https://dribbble.com/shots/3359925-Chat-Hang-App">Concept</a> -->
-
-        <map-viewer [map]="map" flex grow></map-viewer>
+        <!-- <map-viewer [map]="map" [user]="testUser" flex grow></map-viewer>
         <div class="profile" flex column center>
             <div flex row center>
                 <img src="./assets/hogs.png" />
@@ -19,6 +16,51 @@
                 <li fx-1>chat</li>
                 <li fx-1>collects</li>
             </ul>
-        </div>
+        </div> -->
+
+
+        <!-- Views -->
+        <mat-tab-group viewGroup>
+            <!-- Home -->
+            <mat-tab>
+                <div flex column center grow tab-body>
+                    <map-viewer [map]="map" [user]="testUser" flex grow></map-viewer>                    
+                    <!-- Profile -->
+                    <div class="profile" flex column center>
+                        <div flex row center>
+                            <img src="./assets/hogs.png" />
+                        </div>            
+                        <!-- <label class="mt-60px">Lionel</label> -->
+                        <label flex row center class="mt-70px">
+                            <span class="primary">10,344</span>
+                            <span class="secondary">15,664</span>                
+                        </label>                        
+                    </div>
+                </div>
+            </mat-tab>
+            <!-- Leaders -->
+            <mat-tab>
+                <div flex column center grow>
+                    <h3>Leaders</h3>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+        <!-- Menu -->
+        <nav flex column center>            
+            <ul flex row>
+                <li fx-1 (click)="viewGroup.selectedIndex = 0">
+                    <i class="material-icons" [class.active]="viewGroup.selectedIndex == 0">directions_walk</i>
+                </li>
+                <li fx-1 (click)="viewGroup.selectedIndex = 1">
+                    <i class="material-icons" [class.active]="viewGroup.selectedIndex == 1">grade</i>
+                </li>
+                <li fx-1>
+                    <i class="material-icons" [class.active]="viewGroup.selectedIndex == 2">chat_bubble</i>
+                </li>
+                <li fx-1>
+                    <i class="material-icons" [class.active]="viewGroup.selectedIndex == 3">content_copy</i>
+                </li>
+            </ul>
+        </nav>
     </div>  
 </grapple-view>

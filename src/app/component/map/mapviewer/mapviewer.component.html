@@ -8,6 +8,7 @@
     [style.height]="fullHeight"
     [disableDefaultUI]="disabledUI">
 
+    <!-- events -->
     <agm-marker 
         *ngFor="let m of map.event; let i = index"
         (markerClick)="clickedMarker('New Event', i)"
@@ -17,7 +18,7 @@
         [markerDraggable]="false"
         (dragEnd)="markerDragEnd(m, $event)">
     
-            <agm-info-window>                   
+            <agm-info-window *ngIf="canClaim(m)">                   
                 <div flex column>
                     <h4>{{m.name}}</h4>
                     <label>{{m.description}}</label> 
@@ -28,6 +29,14 @@
                 </div>                       
             </agm-info-window>
     
-    </agm-marker>    
+    </agm-marker>  
+    
+    <!-- user -->
+    <agm-marker 
+        *ngIf="user"                
+        [latitude]="user.lat"
+        [longitude]="user.lng"
+        [iconUrl]="icons[100]"
+        [markerDraggable]="false"></agm-marker>
 
 </agm-map>

@@ -49,7 +49,7 @@ export class MapMakerComponent implements OnInit {
 
     clickedMarker(label: string, index: number) {
         console.log(`clicked the marker: ${label || index}`)
-    }
+    }    
     
     mapClicked($event: MouseEvent) {        
         this.map.event.push({

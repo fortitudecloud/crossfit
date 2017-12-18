@@ -11,6 +11,11 @@ map-viewer {
     // perspective: 150px;
 }
 
+[tab-body] {
+    position: relative;
+    overflow: hidden;
+}
+
 .profile {
     position: absolute;
     width: 100%;
@@ -35,18 +40,40 @@ map-viewer {
 
         span {
             text-transform: none;
-            font-weight: 100;
+            font-weight: 300;
             margin: 10px;
-        }
-    }
 
+            &.primary {
+                color: #56a8f1;
+            }
+
+            &.secondary {
+                color: #5661f1;
+            }
+        }
+    }    
+}
+
+nav {
     ul {
+        background-color: #e7e7e7; 
         margin: 0;
         padding: 0;
         list-style: none;
 
         li {
             margin: 0;
+            text-align: center;
+            padding: 10px;
+
+            i {
+                color: rgba(51, 51, 51, 0.5);
+                font-size: 26px;
+
+                &.active {
+                    color: #56a8f1;
+                }
+            }
         }   
     }
 }
@@ -57,5 +84,9 @@ map-viewer {
 
 .mt-60px {
     margin-top: 60px;
+}
+
+.mt-70px {
+    margin-top: 70px;
 }
 

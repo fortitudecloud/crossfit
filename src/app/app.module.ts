@@ -33,7 +33,7 @@ import { HomeViewComponent } from './views/client/home/home.view';
 // Providers
 import { Defaults } from './provider/defaults.provider';
 import { FitbitProvider } from './provider/stub/fitbit.stub.provider'; // ! stub
-
+import { DistanceProvider } from './provider/distance.provider';
 
 @NgModule({
   declarations: [
@@ -57,7 +57,7 @@ import { FitbitProvider } from './provider/stub/fitbit.stub.provider'; // ! stub
     routing
   ],
   providers: [
-      Defaults, FitbitProvider
+      Defaults, FitbitProvider, DistanceProvider
   ],
   bootstrap: [AppComponent]
 })
