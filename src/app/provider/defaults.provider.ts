@@ -139,7 +139,7 @@ export class Defaults {
                 steps: 11
             }]
         },
-        event: {"id":"event873","name":"Top of the town","description":"Power up!","location":{"lat":-36.73018269203475,"lng":146.96123600006104},"type":1},
+        event: {"id":"event853","name":"Top of the town","description":"Power up!","location":{"lat":-36.73018269203475,"lng":146.96123600006104},"type":1},
         date: new Date()
     }, {
         user: {

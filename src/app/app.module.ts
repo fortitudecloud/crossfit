@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // Components
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { ViewComponent } from './views/view.component';
 import { MapMakerComponent } from './component/map/mapmaker/mapmaker.component';
 import { MapViewerComponent } from './component/map/mapviewer/mapviewer.component';
 import { LeaderComponent } from './component/user/leader/leader.component';
+import { CheckinComponent } from './component/dialogs/checkin/checkin.component';
 
 // Directives
 import { ViewGroupDirective } from './directives/view-group.directive';
@@ -39,12 +41,14 @@ import { DistanceProvider } from './provider/distance.provider';
 import { HealthFactory } from './provider/health.factory';
 import { UserStorage } from './provider/stub/storage/user.stub.storage'; // ! stub
 import { AchievementsProvider } from './provider/stub/achievements.stub.provider'; // ! stub
+import { AchievementStorage } from './provider/stub/storage/achievement.stub.storage';
 
 @NgModule({
+  entryComponents: [CheckinComponent],
   declarations: [
     // Components
     AppComponent, MapBuilderViewComponent, ViewComponent, MapMakerComponent, LandingViewComponent,
-    HomeViewComponent, MapViewerComponent, LeaderComponent, SetupViewComponent,
+    HomeViewComponent, MapViewerComponent, LeaderComponent, SetupViewComponent, CheckinComponent,
     // Directives
     ViewGroupDirective
   ],
@@ -57,12 +61,13 @@ import { AchievementsProvider } from './provider/stub/achievements.stub.provider
     }),
     // Material
     MatProgressBarModule, MatTabsModule, MatTableModule, MatFormFieldModule, MatSelectModule,
-    MatInputModule,
+    MatInputModule, MatDialogModule,
     // App 
     routing
   ],
   providers: [
-      Defaults, FitbitProvider, DistanceProvider, HealthFactory, UserStorage, AchievementsProvider
+      Defaults, FitbitProvider, DistanceProvider, HealthFactory, UserStorage, AchievementsProvider,
+      AchievementStorage
   ],
   bootstrap: [AppComponent]
 })
