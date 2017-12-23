@@ -1,0 +1,22 @@
+<div class="playingCards simpleCards">
+    <section class="container" *ngFor="let card of cards">
+        <div id="card" [class.flipped]="show">
+            <figure class="front">
+                <i class="material-icons" flex row center>help_outline</i>
+            </figure>
+            <figure class="back">
+                <div class="card {{card.class}}"
+                    [class.diams]="card.suit == 'diamonds'"
+                    [class.hearts]="card.suit == 'hearts'"
+                    [class.spades]="card.suit == 'spades'"
+                    [class.clubs]="card.suit == 'clubs'">
+                    <span class="rank">{{card.rank}}</span>
+                    <span class="suit" *ngIf="card.suit == 'diamonds'">&diams;</span>
+                    <span class="suit" *ngIf="card.suit == 'hearts'">&hearts;</span>
+                    <span class="suit" *ngIf="card.suit == 'spades'">&spades;</span>
+                    <span class="suit" *ngIf="card.suit == 'clubs'">&clubs;</span>
+                </div>
+            </figure>
+        </div>
+    </section>        
+</div>

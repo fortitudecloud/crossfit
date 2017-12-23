@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule, JsonpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 
 // Routing
@@ -25,6 +26,8 @@ import { MapViewerComponent } from './component/map/mapviewer/mapviewer.componen
 import { LeaderComponent } from './component/user/leader/leader.component';
 import { CheckinComponent } from './component/dialogs/checkin/checkin.component';
 import { CollectionComponent } from './component/dialogs/collection/collection.component';
+import { CardsComponent } from './component/user/cards/cards.component';
+import { AccountComponent } from './component/dialogs/account/account.component';
 
 // Directives
 import { ViewGroupDirective } from './directives/view-group.directive';
@@ -44,20 +47,22 @@ import { UserStorage } from './provider/stub/storage/user.stub.storage'; // ! st
 import { AchievementsProvider } from './provider/stub/achievements.stub.provider'; // ! stub
 import { AchievementStorage } from './provider/stub/storage/achievement.stub.storage'; // ! stub
 import { PokerStorage } from './provider/stub/storage/poker.stub.storage'; // ! stub
+import { PokerCardProvider } from './provider/stub/pokercard.stub.provider'; // ! stub
 
 @NgModule({
-  entryComponents: [CheckinComponent],
+  entryComponents: [CheckinComponent, CollectionComponent, AccountComponent],
   declarations: [
     // Components
     AppComponent, MapBuilderViewComponent, ViewComponent, MapMakerComponent, LandingViewComponent,
     HomeViewComponent, MapViewerComponent, LeaderComponent, SetupViewComponent, CheckinComponent,
-    CollectionComponent,
+    CollectionComponent, CardsComponent, AccountComponent,
     // Directives
     ViewGroupDirective
   ],
   imports: [
     // Angular
     BrowserModule, CommonModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule,
+    HttpModule, JsonpModule,
     // Maps
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBCVJPfwKSgIrz0VWZDL6LNUWMK7M6oR_w'
@@ -70,7 +75,7 @@ import { PokerStorage } from './provider/stub/storage/poker.stub.storage'; // ! 
   ],
   providers: [
       Defaults, FitbitProvider, DistanceProvider, HealthFactory, UserStorage, AchievementsProvider,
-      AchievementStorage, PokerStorage
+      AchievementStorage, PokerStorage, PokerCardProvider
   ],
   bootstrap: [AppComponent]
 })

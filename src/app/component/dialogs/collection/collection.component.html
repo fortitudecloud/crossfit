@@ -1,8 +1,26 @@
-<h1 mat-dialog-title>Card Collected</h1>
+<h1 mat-dialog-title [class.fadeIn]="show" flex row center>Card Collected</h1>
 <div mat-dialog-content>
-    <div class="card rank-2 diams">
-        <span class="rank">2</span>
-        <span class="suit">&diams;</span>
-    </div>
-    <h6>This playing card has been added to your collection</h6>
+    <div class="playingCards simpleCards">
+        <section class="container">
+            <div id="card" [class.flipped]="show">
+                <figure class="front">
+                    <i class="material-icons" flex row center>help_outline</i>
+                </figure>
+                <figure class="back">
+                    <div class="card {{data.class}}"
+                        [class.diams]="data.suit == 'diamonds'"
+                        [class.hearts]="data.suit == 'hearts'"
+                        [class.spades]="data.suit == 'spades'"
+                        [class.clubs]="data.suit == 'clubs'">
+                        <span class="rank">{{data.rank}}</span>
+                        <span class="suit" *ngIf="data.suit == 'diamonds'">&diams;</span>
+                        <span class="suit" *ngIf="data.suit == 'hearts'">&hearts;</span>
+                        <span class="suit" *ngIf="data.suit == 'spades'">&spades;</span>
+                        <span class="suit" *ngIf="data.suit == 'clubs'">&clubs;</span>
+                    </div>
+                </figure>
+            </div>
+        </section>        
+    </div>    
+    <h6 [class.fadeIn]="show">This playing card has been added to your collection</h6>
 </div>

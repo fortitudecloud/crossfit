@@ -28,7 +28,7 @@
                     <!-- Profile -->
                     <div class="profile" flex column center>
                         <div flex row center>
-                            <img src="./assets/hogs.png" />
+                            <img src="./assets/hogs.png" (click)="account()" />
                         </div>            
                         <!-- <label class="mt-60px">Lionel</label> -->
                         <div flex row center>
@@ -53,6 +53,19 @@
                     </div>
                 </div>
             </mat-tab>
+            <!-- Chat -->
+            <mat-tab>
+                <div flex column center grow>
+                    <h3>Chat</h3>                    
+                </div>
+            </mat-tab>
+            <!-- Poker -->
+            <mat-tab>
+                <div flex column center grow>
+                    <h3>Poker Cards</h3>                    
+                    <poker-cards [user]="user" grow></poker-cards>
+                </div>
+            </mat-tab>
         </mat-tab-group>
         <!-- Menu -->
         <nav flex column center>            
@@ -66,7 +79,7 @@
                 <li fx-1 (click)="testUser = {lat: -36.737236559795434, lng: 146.970594227314}">
                     <i class="material-icons" [class.active]="viewGroup.selectedIndex == 2">chat_bubble</i>
                 </li>
-                <li fx-1>
+                <li fx-1 (click)="gotoCards()">
                     <i class="material-icons" [class.active]="viewGroup.selectedIndex == 3">content_copy</i>
                 </li>
             </ul>

@@ -5,8 +5,9 @@
 
 export const environment = {
     production: false,
-    apiURL: 'http://localhost:2110/rest/api',
+    apiURL: 'http://localhost:4000',
     homeURL: 'http://localhost:3000/home?access_token=234SDFSDj4sfSD234&provider=1',
     fitbitApiUrl: 'http://localhost:3000/oauth2/0?code=342dfsdf234fdsgh',
+    fitbitRestApi: 'localhost',
     appleApiUrl: 'http://localhost:3000/oauth2/1?code=324fgdfd45hjfgjs'
 };

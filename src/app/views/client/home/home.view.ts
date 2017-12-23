@@ -2,6 +2,9 @@ import { Observable } from 'rxjs';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatTabGroup } from '@angular/material/tabs';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { CardsComponent } from '../../../component/user/cards/cards.component';
+import { AccountComponent } from '../../../component/dialogs/account/account.component';
 
 import { IMap } from '../../../interface/map.interface';
 import { IAuthProvider } from '../../../interface/auth.interface';
@@ -16,7 +19,8 @@ import { Defaults } from '../../../provider/defaults.provider';
     templateUrl: './home.view.html'
 })
 export class HomeViewComponent implements OnInit {
-    @ViewChild(MatTabGroup) viewGroup: MatTabGroup
+    @ViewChild(MatTabGroup) viewGroup: MatTabGroup;
+    @ViewChild(CardsComponent) pokerCards: CardsComponent;
 
     ready: boolean = false;
     // access_token: string;
@@ -36,7 +40,8 @@ export class HomeViewComponent implements OnInit {
         private achievements: AchievementsProvider,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private defaults: Defaults) {            
+        private defaults: Defaults,
+        public dialog: MatDialog) {            
             navigator.geolocation.getCurrentPosition((pos) => {
                 this.position = {
                     lat: pos.coords.latitude,
@@ -62,6 +67,23 @@ export class HomeViewComponent implements OnInit {
         //     }
         // });
     }       
+
+    gotoCards() {
+        this.viewGroup.selectedIndex = 3;
+        this.pokerCards.sync();
+    }
+
+    account() {
+        this.dialog.open(AccountComponent, {
+            data: {
+                logout: () => {
+                    localStorage.clear();
+                    this.router.navigateByUrl('/');
+                    this.dialog.closeAll();
+                }
+            }
+        });
+    }
     
     loadUser() {
         let user = localStorage.getItem('user');

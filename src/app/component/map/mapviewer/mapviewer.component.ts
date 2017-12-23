@@ -11,9 +11,11 @@ import { DistanceProvider } from '../../../provider/distance.provider';
 import { AchievementsProvider } from '../../../provider/stub/achievements.stub.provider'; // ! stub
 import { AchievementStorage } from '../../../provider/stub/storage/achievement.stub.storage'; // ! stub
 import { PokerStorage } from '../../../provider/stub/storage/poker.stub.storage'; // ! stub
+import { PokerCardProvider } from '../../../provider/stub/pokercard.stub.provider'; // ! stub
 import { Defaults } from '../../../provider/defaults.provider';
 
 import { CheckinComponent } from '../../dialogs/checkin/checkin.component';
+import { CollectionComponent } from '../../dialogs/collection/collection.component';
 
 @Component({
     selector: 'map-viewer',
@@ -47,6 +49,7 @@ export class MapViewerComponent implements OnInit {
         private achievements: AchievementsProvider,
         private achievementsStorage: AchievementStorage,
         private pokerStorage: PokerStorage,
+        private pokerProvider: PokerCardProvider,
         public dialog: MatDialog
     ) {        
         this.styles = defaults.MAP_STYLES;
@@ -87,23 +90,21 @@ export class MapViewerComponent implements OnInit {
             });
         } else if(e.type === IMapEventType.COLLECTABLE) {
             // can't claim a card thats been claimed yet
+            this.pokerStorage.getAll().subscribe(taken => {
+                let newCard = this.pokerProvider.getNewCard(taken, this.user, e);
 
-            var num = 10;
-            var suit = 'spades';
+                this.pokerStorage.add(newCard).subscribe(result => {
+                    if(result) {
+                        this.checkClaims();
+                        this.dialog.open(CollectionComponent, {
+                            data: newCard
+                        });
+                    } else {
+                        // unable to add card. make user try again
+                    }
+                });
 
-            this.pokerStorage.add({
-                id: this.user.username + new Date().toUTCString(),
-                number: num,
-                suit: suit,
-                date: new Date(),
-                user: this.user,
-                event: e
-            }).subscribe(result => {
-                if(result) {
-                    this.checkClaims();
-                    //this.dialog.open(CollectionComponent);
-                }
-            });
+            });                        
         }
     }    
 

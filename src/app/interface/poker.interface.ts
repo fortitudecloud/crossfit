@@ -8,6 +8,7 @@ export class IPokerCard {
     id: string;
     number: number;
     suit: string;
+    rank: string;
     date: Date;
     user: IUser;
     event: IMapEvent;

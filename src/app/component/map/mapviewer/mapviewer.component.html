@@ -1,7 +1,7 @@
 <agm-map 
     *ngIf="ready"
-    [latitude]="map.origin.lat" 
-    [longitude]="map.origin.lng" 
+    [latitude]="position.lat" 
+    [longitude]="position.lng" 
     [styles]="styles" 
     [zoom]="zoom"
     (mapClick)="mapClicked($event)"
