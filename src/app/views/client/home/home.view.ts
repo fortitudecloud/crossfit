@@ -30,8 +30,7 @@ export class HomeViewComponent implements OnInit {
 
     testUser = {lat: -36.73018081106022, lng: 146.96111261844635}; // TODO: remove
 
-    constructor(
-        // private fitbitProvider: FitbitProvider, 
+    constructor(        
         private healthFactory: HealthFactory,       
         private userStorage: UserStorage,
         private achievements: AchievementsProvider,

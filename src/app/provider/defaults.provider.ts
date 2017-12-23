@@ -165,4 +165,31 @@ export class Defaults {
         event: {"id":"event874","name":"Mistery","description":"Power up!","location":{"lat":-36.73018269203475,"lng":146.96123600006104},"type":1},
         date: new Date()
     }];
+    TESTPOKERCARDS = [{
+        id: '1',
+        number: 6,
+        suit: 'hearts',
+        date: new Date(),
+        user: {
+            username: 'Lionel',
+            firstname: 'Lionel',
+            lastname: 'Hickey',
+            displayname: 'Lionel',
+            avatar: '',
+            auth: {
+                provider: IUserAuthProvider.Fitbit,
+                accessToken: 'token',
+                refreshToken: 'refresh',
+                expires: new Date()
+            },
+            steps: [{
+                date: new Date(),
+                day: +(new Date().getDate()),
+                month: +(new Date().getMonth()),
+                year: +(new Date().getFullYear()),            
+                steps: 2099
+            }]
+        },
+        event: {"id":"event259","name":"Poker Challenge","description":"Collect here","location":{"lat":-36.73723333556389,"lng":146.97067737579346},"type":2}
+    }]
 }

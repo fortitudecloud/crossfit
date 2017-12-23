@@ -24,6 +24,7 @@ import { MapMakerComponent } from './component/map/mapmaker/mapmaker.component';
 import { MapViewerComponent } from './component/map/mapviewer/mapviewer.component';
 import { LeaderComponent } from './component/user/leader/leader.component';
 import { CheckinComponent } from './component/dialogs/checkin/checkin.component';
+import { CollectionComponent } from './component/dialogs/collection/collection.component';
 
 // Directives
 import { ViewGroupDirective } from './directives/view-group.directive';
@@ -41,7 +42,8 @@ import { DistanceProvider } from './provider/distance.provider';
 import { HealthFactory } from './provider/health.factory';
 import { UserStorage } from './provider/stub/storage/user.stub.storage'; // ! stub
 import { AchievementsProvider } from './provider/stub/achievements.stub.provider'; // ! stub
-import { AchievementStorage } from './provider/stub/storage/achievement.stub.storage';
+import { AchievementStorage } from './provider/stub/storage/achievement.stub.storage'; // ! stub
+import { PokerStorage } from './provider/stub/storage/poker.stub.storage'; // ! stub
 
 @NgModule({
   entryComponents: [CheckinComponent],
@@ -49,6 +51,7 @@ import { AchievementStorage } from './provider/stub/storage/achievement.stub.sto
     // Components
     AppComponent, MapBuilderViewComponent, ViewComponent, MapMakerComponent, LandingViewComponent,
     HomeViewComponent, MapViewerComponent, LeaderComponent, SetupViewComponent, CheckinComponent,
+    CollectionComponent,
     // Directives
     ViewGroupDirective
   ],
@@ -67,7 +70,7 @@ import { AchievementStorage } from './provider/stub/storage/achievement.stub.sto
   ],
   providers: [
       Defaults, FitbitProvider, DistanceProvider, HealthFactory, UserStorage, AchievementsProvider,
-      AchievementStorage
+      AchievementStorage, PokerStorage
   ],
   bootstrap: [AppComponent]
 })

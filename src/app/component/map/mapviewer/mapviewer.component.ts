@@ -1,12 +1,16 @@
 import { Component, OnInit, Input, Output, ElementRef } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { Observable } from 'rxjs';
 import { IMap, IMapEvent, IMapEventType } from '../../../interface/map.interface';
 import { IUser } from '../../../interface/user.interface';
+import { IAchievements } from '../../../interface/achievements.interface';
+import { IPokerCard } from '../../../interface/poker.interface';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FitbitProvider } from '../../../provider/stub/fitbit.stub.provider'; // ! stub
 import { DistanceProvider } from '../../../provider/distance.provider';
 import { AchievementsProvider } from '../../../provider/stub/achievements.stub.provider'; // ! stub
-import { AchievementStorage } from '../../../provider/stub/storage/achievement.stub.storage';
+import { AchievementStorage } from '../../../provider/stub/storage/achievement.stub.storage'; // ! stub
+import { PokerStorage } from '../../../provider/stub/storage/poker.stub.storage'; // ! stub
 import { Defaults } from '../../../provider/defaults.provider';
 
 import { CheckinComponent } from '../../dialogs/checkin/checkin.component';
@@ -42,6 +46,7 @@ export class MapViewerComponent implements OnInit {
         private distance: DistanceProvider,
         private achievements: AchievementsProvider,
         private achievementsStorage: AchievementStorage,
+        private pokerStorage: PokerStorage,
         public dialog: MatDialog
     ) {        
         this.styles = defaults.MAP_STYLES;
@@ -69,16 +74,37 @@ export class MapViewerComponent implements OnInit {
     }
 
     claimEvent(e: IMapEvent) {
-        this.achievementsStorage.add({
-            user: this.user,
-            event: e,
-            date: new Date()
-        }).subscribe(result => {
-            if(result) {
-                this.checkClaims();
-                this.dialog.open(CheckinComponent);
-            }
-        });
+        if(e.type === IMapEventType.CHECKIN) {
+            this.achievementsStorage.add({
+                user: this.user,
+                event: e,
+                date: new Date()
+            }).subscribe(result => {
+                if(result) {
+                    this.checkClaims();
+                    this.dialog.open(CheckinComponent);
+                }
+            });
+        } else if(e.type === IMapEventType.COLLECTABLE) {
+            // can't claim a card thats been claimed yet
+
+            var num = 10;
+            var suit = 'spades';
+
+            this.pokerStorage.add({
+                id: this.user.username + new Date().toUTCString(),
+                number: num,
+                suit: suit,
+                date: new Date(),
+                user: this.user,
+                event: e
+            }).subscribe(result => {
+                if(result) {
+                    this.checkClaims();
+                    //this.dialog.open(CollectionComponent);
+                }
+            });
+        }
     }    
 
     clickedMarker(label: string, index: number) {
@@ -94,10 +120,18 @@ export class MapViewerComponent implements OnInit {
     }
 
     private checkClaims() {
-        var achieved = this.achievements.get(this.user, new Date());        
-        var claimed = [];
+        //var achieved = this.achievements.get(this.user, new Date()); 
+        var achieved = this.achievementsStorage.get(this.user);
+        var collected = this.pokerStorage.getUsers(this.user, new Date());
         
-        this.map.event = this.map.event.filter(e => !achieved.find(a => a.event.id === e.id));
+        Observable.forkJoin([achieved, collected]).subscribe(data => {            
+            let ach = <IAchievements[]><any>data[0];
+            let col = <IPokerCard[]><any>data[1];
+
+            this.map.event = this.map.event.filter(e => 
+                !ach.find(a => a.event.id === e.id) && 
+                !col.find(c => c.event.id === e.id));
+        });
     }
 
 }
