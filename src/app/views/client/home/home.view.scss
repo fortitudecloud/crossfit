@@ -1,8 +1,13 @@
+// map-viewer {
+//     // height: 100%;
+//     height: 500px;
+//     // width: 100%;
+//     width: 350px;
+// }
+
 map-viewer {
-    // height: 100%;
-    height: 500px;
-    // width: 100%;
-    width: 350px;
+    width: 100vh;
+    height: 100vh;
 }
 
 [view-body] {

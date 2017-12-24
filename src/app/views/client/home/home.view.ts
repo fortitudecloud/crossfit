@@ -5,6 +5,7 @@ import { MatTabGroup } from '@angular/material/tabs';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { CardsComponent } from '../../../component/user/cards/cards.component';
 import { AccountComponent } from '../../../component/dialogs/account/account.component';
+import { MapViewerComponent } from '../../../component/map/mapviewer/mapviewer.component';
 
 import { IMap } from '../../../interface/map.interface';
 import { IAuthProvider } from '../../../interface/auth.interface';
@@ -24,6 +25,7 @@ import { environment } from '../../../../environments/environment';
 export class HomeViewComponent implements OnInit {
     @ViewChild(MatTabGroup) viewGroup: MatTabGroup;
     @ViewChild(CardsComponent) pokerCards: CardsComponent;
+    // @ViewChild(MapViewerComponent) mapView: MapViewerComponent;
 
     ready: boolean = false;
     // access_token: string;
@@ -115,7 +117,15 @@ export class HomeViewComponent implements OnInit {
 
         this.sync().subscribe(u => {
             this.user = u;
-            this.ready = true;
+
+            window.setTimeout(() => {
+                // let mapClient = document.querySelector('[tab-body]');
+                // let mapView = document.querySelector('map-viewer');
+
+                // mapView. = mapClient.clientHeight;
+
+                this.ready = true;
+            });            
             
             this.getSteps();
 
