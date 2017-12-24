@@ -119,10 +119,10 @@ export class HomeViewComponent implements OnInit {
             this.user = u;
 
             window.setTimeout(() => {
-                let mapClient = document.querySelector('[tab-body]');
-                let mapView = document.querySelector('map-viewer');
+                // let mapClient = document.querySelector('[tab-body]');
+                // let mapView = document.querySelector('map-viewer');
 
-                (<any>mapView).style.height = mapClient.clientHeight + 'px';
+                // (<any>mapView).style.height = mapClient.clientHeight + 'px';
 
                 this.ready = true;
             });            

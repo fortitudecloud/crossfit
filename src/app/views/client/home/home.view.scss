@@ -7,7 +7,7 @@
 
 map-viewer {
     width: 100%;
-    // height: 100%;
+    height: 100%;
     flex-grow: 1;
 }
 
@@ -19,7 +19,7 @@ map-viewer {
 
 [tab-body] {
     position: relative;
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
 }
 
