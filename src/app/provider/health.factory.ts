@@ -3,7 +3,8 @@ import { IAuthProvider } from '../interface/auth.interface';
 import { IStepProvider } from '../interface/step.interface';
 import { IUserAuthProvider } from '../interface/user.interface';
 
-import { FitbitProvider } from './stub/fitbit.stub.provider';
+// import { FitbitProvider } from './stub/fitbit.stub.provider'; // ! stub
+import { FitbitProvider } from './fitbit.provider';
 
 @Injectable()
 export class HealthFactory {

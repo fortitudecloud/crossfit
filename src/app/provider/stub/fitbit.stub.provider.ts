@@ -35,9 +35,13 @@ export class FitbitProvider implements IAuthProvider, IStepProvider {
         });
     }
 
-    auth(): string {
+    auth(): Observable<string> {
         // skip fitbit authentication process and pretend its happen
-        return environment.fitbitApiUrl;
+        return new Observable(ob => {
+            ob.next(environment.fitbitApiUrl);
+            ob.complete();
+        });
+
     }
 
     getTokens(code: string): Observable<IUserAuth> {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HealthFactory, IHealthProvider } from '../../../provider/health.factory';
 import { IUserAuth } from '../../../interface/user.interface';
+import { UserStorage } from '../../../provider/storage/user.storage'; 
 
 @Component({
     styleUrls: ['./setup.view.scss'],
@@ -14,6 +15,7 @@ export class SetupViewComponent implements OnInit {
 
     constructor(
         private healthFactory: HealthFactory,       
+        private userStorage: UserStorage,
         private router: Router,
         private activatedRoute: ActivatedRoute) { }
 
@@ -29,6 +31,7 @@ export class SetupViewComponent implements OnInit {
 
             if(token) {
                 this.getUserAndForward(JSON.parse(token));
+                return;
             }
 
             this.healthProvider.getTokens(this.code).subscribe(tokens => {
@@ -40,8 +43,14 @@ export class SetupViewComponent implements OnInit {
 
     getUserAndForward(tokens: IUserAuth) {
         this.healthProvider.getUserInfo(tokens).subscribe(user => {
-            localStorage.setItem('user', JSON.stringify(user));
-            this.router.navigateByUrl('/home');
+            // create new user
+            this.userStorage.add(user).subscribe(result => {
+                // set localstorage and navigate
+                localStorage.setItem('user', JSON.stringify(user));
+                this.router.navigateByUrl('/home');
+            }, (err) => {
+                this.router.navigateByUrl('/');
+            });            
         });
     }
 

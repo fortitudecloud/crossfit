@@ -3,7 +3,7 @@ import { IUserAuth, IUser } from './user.interface';
 
 export interface IAuthProvider {
     /** starts authentication and returns a redirect URL  */
-    auth(): string;
+    auth(): Observable<string>;
     /** get existing or fresh access tokens from the auth provider */
     getTokens(code: string): Observable<IUserAuth>;    
 }

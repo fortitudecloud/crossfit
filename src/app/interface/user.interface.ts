@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 
 export interface IUser {
+    id: string;
     username: string;
     displayname: string;
     firstname: string;

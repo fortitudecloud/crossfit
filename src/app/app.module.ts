@@ -40,14 +40,20 @@ import { SetupViewComponent } from './views/client/setup/setup.view';
 
 // Providers
 import { Defaults } from './provider/defaults.provider';
-import { FitbitProvider } from './provider/stub/fitbit.stub.provider'; // ! stub
+// import { FitbitProvider } from './provider/stub/fitbit.stub.provider'; // ! stub
+import { FitbitProvider } from './provider/fitbit.provider'; 
 import { DistanceProvider } from './provider/distance.provider';
 import { HealthFactory } from './provider/health.factory';
-import { UserStorage } from './provider/stub/storage/user.stub.storage'; // ! stub
-import { AchievementsProvider } from './provider/stub/achievements.stub.provider'; // ! stub
-import { AchievementStorage } from './provider/stub/storage/achievement.stub.storage'; // ! stub
-import { PokerStorage } from './provider/stub/storage/poker.stub.storage'; // ! stub
-import { PokerCardProvider } from './provider/stub/pokercard.stub.provider'; // ! stub
+// import { UserStorage } from './provider/stub/storage/user.stub.storage'; // ! stub
+import { UserStorage } from './provider/storage/user.storage';
+// import { AchievementsProvider } from './provider/stub/achievements.stub.provider'; // ! stub
+import { AchievementsProvider } from './provider/achievement.provider';
+// import { AchievementStorage } from './provider/stub/storage/achievement.stub.storage'; // ! stub
+import { AchievementStorage } from './provider/storage/achievement.storage';
+// import { PokerStorage } from './provider/stub/storage/poker.stub.storage'; // ! stub
+import { PokerStorage } from './provider/storage/poker.storage';
+// import { PokerCardProvider } from './provider/stub/pokercard.stub.provider'; // ! stub
+import { PokerCardProvider } from './provider/pokercard.provider';
 
 @NgModule({
   entryComponents: [CheckinComponent, CollectionComponent, AccountComponent],

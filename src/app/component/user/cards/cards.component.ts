@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { IUser } from '../../../interface/user.interface';
 import { IPokerCard } from '../../../interface/poker.interface';
 import { Defaults } from '../../../provider/defaults.provider';
-import { PokerStorage } from '../../../provider/stub/storage/poker.stub.storage';
+// import { PokerStorage } from '../../../provider/stub/storage/poker.stub.storage';
+import { PokerStorage } from '../../../provider/storage/poker.storage';
 
 @Component({
     selector: 'poker-cards',

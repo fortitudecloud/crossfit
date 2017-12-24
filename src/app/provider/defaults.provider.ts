@@ -85,6 +85,7 @@ export class Defaults {
         }
     ];
     TESTUSERS = [{
+        id: 'wersdf234',
         username: 'Lionel',
         firstname: 'Lionel',
         lastname: 'Hickey',
@@ -120,6 +121,7 @@ export class Defaults {
     BONUSSTEPINCREMENT = 2000;
     TESTACHIEVEMENTS = [{
         user: {
+            id: 'wersdf234',
             username: 'Lionel',
             firstname: 'Lionel',
             lastname: 'Hickey',
@@ -143,6 +145,7 @@ export class Defaults {
         date: new Date()
     }, {
         user: {
+            id: 'wersdf234',
             username: 'Lionel',
             firstname: 'Lionel',
             lastname: 'Hickey',
@@ -172,6 +175,7 @@ export class Defaults {
         rank: '6',
         date: new Date(),
         user: {
+            id: 'wersdf234',
             username: 'Lionel',
             firstname: 'Lionel',
             lastname: 'Hickey',

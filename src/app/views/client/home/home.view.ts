@@ -10,9 +10,12 @@ import { IMap } from '../../../interface/map.interface';
 import { IAuthProvider } from '../../../interface/auth.interface';
 import { IUserAuthProvider, IUser, IUserStep } from '../../../interface/user.interface';
 import { HealthFactory, IHealthProvider } from '../../../provider/health.factory';
-import { UserStorage } from '../../../provider/stub/storage/user.stub.storage'; // ! stub
-import { AchievementsProvider } from '../../../provider/stub/achievements.stub.provider'; // ! stub
+// import { UserStorage } from '../../../provider/stub/storage/user.stub.storage'; // ! stub
+import { UserStorage } from '../../../provider/storage/user.storage'; 
+// import { AchievementsProvider } from '../../../provider/stub/achievements.stub.provider'; // ! stub
+import { AchievementsProvider } from '../../../provider/achievement.provider';
 import { Defaults } from '../../../provider/defaults.provider';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     styleUrls: ['./home.view.scss'],
@@ -31,6 +34,7 @@ export class HomeViewComponent implements OnInit {
     user: IUser;
     steps = 0;
     bonus = 0;
+    watchLoc: any;
 
     testUser = {lat: -36.73018081106022, lng: 146.96111261844635}; // TODO: remove
 
@@ -41,13 +45,26 @@ export class HomeViewComponent implements OnInit {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private defaults: Defaults,
-        public dialog: MatDialog) {            
-            navigator.geolocation.getCurrentPosition((pos) => {
+        public dialog: MatDialog) {  
+            this.position = this.testUser;            
+            
+            navigator.geolocation.getCurrentPosition((pos) => {                
                 this.position = {
                     lat: pos.coords.latitude,
                     lng: pos.coords.longitude
                 };                
-            });            
+            }, (err) => {
+                console.error(err)
+            }, {
+                timeout: 10000
+            });               
+            
+            this.watchLoc = navigator.geolocation.watchPosition((pos) => {
+                this.position = {
+                    lat: pos.coords.latitude,
+                    lng: pos.coords.longitude
+                };                
+            });
 
             this.map = this.defaults.TESTMAPS[0]; // replace with actual map
             this.map.origin = this.testUser; // replace          
@@ -139,10 +156,10 @@ export class HomeViewComponent implements OnInit {
     private getSteps() {
         let steps = this.user.steps.find(s => this.isSameDate(s.date, new Date()));
         if(steps) {
-            let ach = this.achievements.get(this.user, new Date());
-
-            this.steps = steps.steps;
-            this.bonus = this.achievements.calculateBonus(this.steps, ach);
+            this.achievements.get(this.user, new Date()).subscribe(ach => {
+                this.steps = steps.steps;
+                this.bonus = this.achievements.calculateBonus(this.steps, ach);
+            });            
         }
     }
 

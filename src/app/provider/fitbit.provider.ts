@@ -6,17 +6,18 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
-const FitbitClient = require('fitbit-client-oauth2');
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class FitbitProvider implements IAuthProvider, IStepProvider {    
 
-    client: any;
+    //client: any;
     redirect_uri: string;
     scope = [];  
 
     constructor(private http: Http) {        
-        this.client = new FitbitClient('22CGY6', '3e94747028c020bece22aa395baac816');
+        //this.client = new FitbitClient('22CGY6', '3e94747028c020bece22aa395baac816');
         this.redirect_uri = environment.fitbitApiUrl;
         this.scope =  [ 'activity', 'nutrition', 'profile', 'settings', 'sleep', 'social', 'weight' ];
     }
@@ -26,11 +27,7 @@ export class FitbitProvider implements IAuthProvider, IStepProvider {
             let url = environment.fitbitRestApi + '/profile.json'; 
 
             let headers = new Headers({
-                Authorization: 'Bearer ' + {
-                    access_token: userAuth.accessToken,
-                    refresh_token: userAuth.refreshToken,
-                    expires_in: userAuth.expires
-                }
+                Authorization: 'Bearer ' + userAuth.accessToken
             });
             let options = new RequestOptions({ headers: headers });
 
@@ -39,7 +36,16 @@ export class FitbitProvider implements IAuthProvider, IStepProvider {
                 .catch((err) => Observable.throw(err.json().err) || 'getUserInfo error')
                 .subscribe(resp => {
                     // return IUserStep
-                    ob.next(<IUser>resp);
+                    ob.next(<IUser>{
+                        id: resp.user.firstName + resp.user.lastName,
+                        username: resp.user.displayName,
+                        displayname: resp.user.displayName,
+                        firstname: resp.user.firstName,
+                        lastname: resp.user.lastName,
+                        avatar: resp.user.avatar150,
+                        auth: userAuth,
+                        steps: []
+                    });
                 }, (err) => {
                     ob.error(err);
                 }, () => {
@@ -57,11 +63,7 @@ export class FitbitProvider implements IAuthProvider, IStepProvider {
                 + today.getDate() + '.json';
 
             let headers = new Headers({
-                Authorization: 'Bearer ' + {
-                    access_token: userAuth.accessToken,
-                    refresh_token: userAuth.refreshToken,
-                    expires_in: userAuth.expires
-                }
+                Authorization: 'Bearer ' + userAuth.accessToken
             });
             let options = new RequestOptions({ headers: headers });
 
@@ -86,16 +88,31 @@ export class FitbitProvider implements IAuthProvider, IStepProvider {
         });
     }
 
-    auth(): string {
+    auth(): Observable<string> {
         // skip fitbit authentication process and pretend its happen
-        var authorization_uri = this.client.getAuthorizationUrl(this.redirect_uri, this.scope);
-        return authorization_uri;
+        return new Observable(ob => {
+            let url = environment.apiURL + '/fitbit/redirect'; 
+            
+            this.http.get(url)
+                .map(res => res.json())
+                .catch((err) => Observable.throw(err.json().err) || 'getRedirect error')
+                .subscribe(resp => {
+                    // return IUserStep
+                    ob.next(<string>resp.url);
+                }, (err) => {
+                    ob.error(err);
+                }, () => {
+                    ob.complete();
+                });
+        });
+        // var authorization_uri = this.client.getAuthorizationUrl(this.redirect_uri, this.scope);
+        // return authorization_uri;
     }
 
     getTokens(code: string): Observable<IUserAuth> {
         // fake token collection        
         return new Observable(ob => {
-            let url = environment.apiURL + '/fitbit/auth'; 
+            let url = environment.apiURL + '/fitbit/auth/' + code; 
 
             this.http.get(url)
                 .map(res => res.json())
@@ -104,9 +121,9 @@ export class FitbitProvider implements IAuthProvider, IStepProvider {
                     // return IUserStep
                     ob.next(<IUserAuth>{
                         provider: IUserAuthProvider.Fitbit,
-                        accessToken: resp.access_token,
-                        refreshToken: resp.refresh_token,
-                        expires: resp.expires_in
+                        accessToken: resp.token.access_token,
+                        refreshToken: resp.token.refresh_token,
+                        expires: resp.token.expires_in
                     });
                 }, (err) => {
                     ob.error(err);

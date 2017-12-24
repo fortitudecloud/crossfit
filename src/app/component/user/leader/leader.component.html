@@ -1,5 +1,5 @@
 <div stat flex column center *ngFor="let l of leaders; let i = index">
-    <div flex row>
+    <div flex row *ngIf="!updating && achievementsAll">
         <h3 flex column center>{{i+1}}</h3>
         <img src="./assets/hogs.png" />
         <div flex column grow>

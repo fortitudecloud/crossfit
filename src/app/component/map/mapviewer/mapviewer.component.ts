@@ -6,12 +6,16 @@ import { IUser } from '../../../interface/user.interface';
 import { IAchievements } from '../../../interface/achievements.interface';
 import { IPokerCard } from '../../../interface/poker.interface';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FitbitProvider } from '../../../provider/stub/fitbit.stub.provider'; // ! stub
+// import { FitbitProvider } from '../../../provider/stub/fitbit.stub.provider'; // ! stub
 import { DistanceProvider } from '../../../provider/distance.provider';
-import { AchievementsProvider } from '../../../provider/stub/achievements.stub.provider'; // ! stub
-import { AchievementStorage } from '../../../provider/stub/storage/achievement.stub.storage'; // ! stub
-import { PokerStorage } from '../../../provider/stub/storage/poker.stub.storage'; // ! stub
-import { PokerCardProvider } from '../../../provider/stub/pokercard.stub.provider'; // ! stub
+// import { AchievementsProvider } from '../../../provider/stub/achievements.stub.provider'; // ! stub
+import { AchievementsProvider } from '../../../provider/achievement.provider';
+// import { AchievementStorage } from '../../../provider/stub/storage/achievement.stub.storage'; // ! stub
+import { AchievementStorage } from '../../../provider/storage/achievement.storage';
+// import { PokerStorage } from '../../../provider/stub/storage/poker.stub.storage'; // ! stub
+import { PokerStorage } from '../../../provider/storage/poker.storage';
+// import { PokerCardProvider } from '../../../provider/stub/pokercard.stub.provider'; // ! stub
+import { PokerCardProvider } from '../../../provider/pokercard.provider';
 import { Defaults } from '../../../provider/defaults.provider';
 
 import { CheckinComponent } from '../../dialogs/checkin/checkin.component';
