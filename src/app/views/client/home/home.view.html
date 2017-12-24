@@ -23,6 +23,10 @@
         <mat-tab-group viewGroup>
             <!-- Home -->
             <mat-tab>
+                <div flex column center groe *ngIf="!user || !position">
+                    <label>User: <span>{{user | json}}</span></label>
+                    <label>Position: <span>{{position | json}}</span></label>
+                </div>
                 <div flex column center grow tab-body *ngIf="user && position">
                     <map-viewer [map]="map" [position]="position" [user]="user" flex grow></map-viewer>                    
                     <!-- Profile -->
