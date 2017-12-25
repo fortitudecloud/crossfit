@@ -9,7 +9,7 @@ COPY . /app
 
 RUN npm install -g simple-angular-server
 
-EXPOSE 443
+EXPOSE 4200
 
-CMD [ "angularserver", "--port", "443" ]
+CMD [ "angularserver", "--port", "4200" ]
 
