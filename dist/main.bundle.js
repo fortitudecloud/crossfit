@@ -2718,9 +2718,9 @@ module.exports = __webpack_require__.p + "yosemite.894ce2586d5c9aa3bd61.jpg";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 var environment = {
     production: true,
-    apiURL: 'http://192.168.15.178:4000',
-    homeURL: 'http://192.168.15.178:5200/home',
-    fitbitApiUrl: 'http://192.168.15.178:5200/oauth2/0',
+    apiURL: 'http://35.189.50.219:4000',
+    homeURL: 'http://35.189.50.219/home',
+    fitbitApiUrl: 'http://35.189.50.219/oauth2/0',
     fitbitRestApi: 'https://api.fitbit.com/1/user/-',
     appleApiUrl: 'http://localhost:3000/oauth2/1',
     geoApi: 'https://www.googleapis.com/geolocation/v1/geolocate',

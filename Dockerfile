@@ -1,8 +1,8 @@
-#FROM node
+FROM node
 #FROM node:7.4.0-slim
 #FROM grapple
 #FROM hypriot/rpi-node
-FROM amble/nodemonjs7-pi
+#FROM amble/nodemonjs7-pi
 
 WORKDIR /app/dist
 COPY . /app
