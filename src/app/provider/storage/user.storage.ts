@@ -47,4 +47,22 @@ export class UserStorage {
         })
     }
 
+    get(username: string): Observable<IUser> {
+        return new Observable(ob => {
+            let url = environment.apiURL + '/rest/api/user';
+
+            this.http.get(url) 
+                .map(res => res.json())               
+                .catch((err) => Observable.throw(err.json().err) || 'get error')
+                .subscribe(resp => {
+                    // return IUserStep
+                    ob.next(resp.find(u => u.username === username));
+                }, (err) => {
+                    ob.error(err);
+                }, () => {
+                    ob.complete();
+                });            
+        });
+    }
+
 }

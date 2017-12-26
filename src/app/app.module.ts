@@ -54,6 +54,7 @@ import { AchievementStorage } from './provider/storage/achievement.storage';
 import { PokerStorage } from './provider/storage/poker.storage';
 // import { PokerCardProvider } from './provider/stub/pokercard.stub.provider'; // ! stub
 import { PokerCardProvider } from './provider/pokercard.provider';
+import { Geolocation } from './provider/geolocation.provider';
 
 @NgModule({
   entryComponents: [CheckinComponent, CollectionComponent, AccountComponent],
@@ -81,7 +82,7 @@ import { PokerCardProvider } from './provider/pokercard.provider';
   ],
   providers: [
       Defaults, FitbitProvider, DistanceProvider, HealthFactory, UserStorage, AchievementsProvider,
-      AchievementStorage, PokerStorage, PokerCardProvider
+      AchievementStorage, PokerStorage, PokerCardProvider, Geolocation
   ],
   bootstrap: [AppComponent]
 })

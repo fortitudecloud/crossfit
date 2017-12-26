@@ -5,9 +5,11 @@
 
 export const environment = {
     production: false,
-    apiURL: 'http://localhost:4000',
-    homeURL: 'http://localhost:3000/home?access_token=234SDFSDj4sfSD234&provider=1',
-    fitbitApiUrl: 'http://localhost:3000/oauth2/0?code=342dfsdf234fdsgh',
-    fitbitRestApi: 'localhost',
-    appleApiUrl: 'http://localhost:3000/oauth2/1?code=324fgdfd45hjfgjs'
+    apiURL: 'http://192.168.15.178:4000',
+    homeURL: 'http://localhost:3000/home',
+    fitbitApiUrl: 'http://localhost:3000/oauth2/0',
+    fitbitRestApi: 'https://api.fitbit.com/1/user/-',
+    appleApiUrl: 'http://localhost:3000/oauth2/1',
+    geoApi: 'https://www.googleapis.com/geolocation/v1/geolocate',
+    mapKey: 'AIzaSyBCVJPfwKSgIrz0VWZDL6LNUWMK7M6oR_w'
 };

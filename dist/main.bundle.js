@@ -124,6 +124,7 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__provider_storage_achievement_storage__ = __webpack_require__("../../../../../src/app/provider/storage/achievement.storage.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__provider_storage_poker_storage__ = __webpack_require__("../../../../../src/app/provider/storage/poker.storage.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__provider_pokercard_provider__ = __webpack_require__("../../../../../src/app/provider/pokercard.provider.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__provider_geolocation_provider__ = __webpack_require__("../../../../../src/app/provider/geolocation.provider.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -180,6 +181,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 // import { PokerCardProvider } from './provider/stub/pokercard.stub.provider'; // ! stub
 
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -210,7 +212,7 @@ var AppModule = (function () {
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_29__provider_defaults_provider__["a" /* Defaults */], __WEBPACK_IMPORTED_MODULE_30__provider_fitbit_provider__["a" /* FitbitProvider */], __WEBPACK_IMPORTED_MODULE_31__provider_distance_provider__["a" /* DistanceProvider */], __WEBPACK_IMPORTED_MODULE_32__provider_health_factory__["a" /* HealthFactory */], __WEBPACK_IMPORTED_MODULE_33__provider_storage_user_storage__["a" /* UserStorage */], __WEBPACK_IMPORTED_MODULE_34__provider_achievement_provider__["a" /* AchievementsProvider */],
-                __WEBPACK_IMPORTED_MODULE_35__provider_storage_achievement_storage__["a" /* AchievementStorage */], __WEBPACK_IMPORTED_MODULE_36__provider_storage_poker_storage__["a" /* PokerStorage */], __WEBPACK_IMPORTED_MODULE_37__provider_pokercard_provider__["a" /* PokerCardProvider */]
+                __WEBPACK_IMPORTED_MODULE_35__provider_storage_achievement_storage__["a" /* AchievementStorage */], __WEBPACK_IMPORTED_MODULE_36__provider_storage_poker_storage__["a" /* PokerStorage */], __WEBPACK_IMPORTED_MODULE_37__provider_pokercard_provider__["a" /* PokerCardProvider */], __WEBPACK_IMPORTED_MODULE_38__provider_geolocation_provider__["a" /* Geolocation */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_15__app_component__["a" /* AppComponent */]]
         })
@@ -1627,6 +1629,71 @@ var FitbitProvider = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/provider/geolocation.provider.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Geolocation; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/catch.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var Geolocation = (function () {
+    function Geolocation(http) {
+        this.http = http;
+    }
+    Geolocation.prototype.getPosition = function () {
+        var _this = this;
+        return new __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"](function (ob) {
+            var url = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].geoApi + '?key=' + __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].mapKey;
+            _this.http.post(url, {})
+                .map(function (res) { return res.json(); })
+                .catch(function (err) { return __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].throw(err.json().err) || 'getPosition error'; })
+                .subscribe(function (resp) {
+                // return IUserStep
+                ob.next({ lat: resp.location.lat, lng: resp.location.lng });
+            }, function (err) {
+                ob.error(err);
+            }, function () {
+                ob.complete();
+            });
+        });
+    };
+    Geolocation = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
+    ], Geolocation);
+    return Geolocation;
+}());
+
+// jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDCa1LUe1vOczX1hO_iGYgyo8p_jYuGOPU", function(success) {
+//     apiGeolocationSuccess({coords: {latitude: success.location.lat, longitude: success.location.lng}});
+// })
+// .fail(function(err) {
+// alert("API Geolocation error! \n\n"+err);
+// }); 
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/provider/health.factory.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1973,6 +2040,23 @@ var UserStorage = (function () {
             });
         });
     };
+    UserStorage.prototype.get = function (username) {
+        var _this = this;
+        return new __WEBPACK_IMPORTED_MODULE_0_rxjs__["Observable"](function (ob) {
+            var url = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].apiURL + '/rest/api/user';
+            _this.http.get(url)
+                .map(function (res) { return res.json(); })
+                .catch(function (err) { return __WEBPACK_IMPORTED_MODULE_0_rxjs__["Observable"].throw(err.json().err) || 'get error'; })
+                .subscribe(function (resp) {
+                // return IUserStep
+                ob.next(resp.find(function (u) { return u.username === username; }));
+            }, function (err) {
+                ob.error(err);
+            }, function () {
+                ob.complete();
+            });
+        });
+    };
     UserStorage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */]])
@@ -2144,6 +2228,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__provider_storage_user_storage__ = __webpack_require__("../../../../../src/app/provider/storage/user.storage.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__provider_achievement_provider__ = __webpack_require__("../../../../../src/app/provider/achievement.provider.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__provider_defaults_provider__ = __webpack_require__("../../../../../src/app/provider/defaults.provider.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__provider_geolocation_provider__ = __webpack_require__("../../../../../src/app/provider/geolocation.provider.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2166,9 +2251,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 // import { AchievementsProvider } from '../../../provider/stub/achievements.stub.provider'; // ! stub
 
 
+
 var HomeViewComponent = (function () {
-    function HomeViewComponent(healthFactory, userStorage, achievements, router, activatedRoute, defaults, dialog) {
-        var _this = this;
+    function HomeViewComponent(healthFactory, userStorage, achievements, router, activatedRoute, defaults, dialog, geolocation) {
         this.healthFactory = healthFactory;
         this.userStorage = userStorage;
         this.achievements = achievements;
@@ -2176,28 +2261,30 @@ var HomeViewComponent = (function () {
         this.activatedRoute = activatedRoute;
         this.defaults = defaults;
         this.dialog = dialog;
+        this.geolocation = geolocation;
         // @ViewChild(MapViewerComponent) mapView: MapViewerComponent;
         this.ready = false;
         this.steps = 0;
         this.bonus = 0;
         this.testUser = { lat: -36.73018081106022, lng: 146.96111261844635 }; // TODO: remove
         this.position = this.testUser;
-        navigator.geolocation.getCurrentPosition(function (pos) {
-            _this.position = {
-                lat: pos.coords.latitude,
-                lng: pos.coords.longitude
-            };
-        }, function (err) {
-            console.error(err);
-        }, {
-            timeout: 10000
-        });
-        this.watchLoc = navigator.geolocation.watchPosition(function (pos) {
-            _this.position = {
-                lat: pos.coords.latitude,
-                lng: pos.coords.longitude
-            };
-        });
+        // navigator.geolocation.getCurrentPosition((pos) => {                
+        //     this.position = {
+        //         lat: pos.coords.latitude,
+        //         lng: pos.coords.longitude
+        //     };                
+        // }, (err) => {
+        //     console.error(err)
+        // }, {
+        //     timeout: 10000
+        // });               
+        // this.watchLoc = navigator.geolocation.watchPosition((pos) => {
+        //     this.position = {
+        //         lat: pos.coords.latitude,
+        //         lng: pos.coords.longitude
+        //     };                
+        // });
+        this.geoLocate();
         this.map = this.defaults.TESTMAPS[0]; // replace with actual map
         this.map.origin = this.testUser; // replace          
     }
@@ -2214,6 +2301,16 @@ var HomeViewComponent = (function () {
         //         this.sync();
         //     }
         // });
+    };
+    HomeViewComponent.prototype.geoLocate = function () {
+        var _this = this;
+        var loop = function () {
+            window.setTimeout(function () {
+                _this.geolocation.getPosition().subscribe(function (pos) { return _this.position = pos; });
+                loop();
+            }, 5000);
+        };
+        loop();
     };
     HomeViewComponent.prototype.gotoCards = function () {
         this.viewGroup.selectedIndex = 3;
@@ -2317,7 +2414,8 @@ var HomeViewComponent = (function () {
             __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */],
             __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */],
             __WEBPACK_IMPORTED_MODULE_10__provider_defaults_provider__["a" /* Defaults */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_material__["b" /* MatDialog */]])
+            __WEBPACK_IMPORTED_MODULE_4__angular_material__["b" /* MatDialog */],
+            __WEBPACK_IMPORTED_MODULE_11__provider_geolocation_provider__["a" /* Geolocation */]])
     ], HomeViewComponent);
     return HomeViewComponent;
 }());
@@ -2474,14 +2572,28 @@ var SetupViewComponent = (function () {
     };
     SetupViewComponent.prototype.getUserAndForward = function (tokens) {
         var _this = this;
+        var forward = function (user) {
+            // set localstorage and navigate
+            localStorage.setItem('user', JSON.stringify(user));
+            _this.router.navigateByUrl('/home');
+        };
         this.healthProvider.getUserInfo(tokens).subscribe(function (user) {
-            // create new user
-            _this.userStorage.add(user).subscribe(function (result) {
-                // set localstorage and navigate
-                localStorage.setItem('user', JSON.stringify(user));
-                _this.router.navigateByUrl('/home');
-            }, function (err) {
-                _this.router.navigateByUrl('/');
+            // existing user?
+            _this.userStorage.get(user.username).subscribe(function (resp) {
+                if (resp) {
+                    _this.userStorage.update(user).subscribe(function (result) {
+                        forward(user);
+                    }, function (err) {
+                        _this.router.navigateByUrl('/');
+                    });
+                }
+                else {
+                    _this.userStorage.add(user).subscribe(function (result) {
+                        forward(user);
+                    }, function (err) {
+                        _this.router.navigateByUrl('/');
+                    });
+                }
             });
         });
     };
@@ -2610,7 +2722,9 @@ var environment = {
     homeURL: 'http://192.168.15.178:5200/home',
     fitbitApiUrl: 'http://192.168.15.178:5200/oauth2/0',
     fitbitRestApi: 'https://api.fitbit.com/1/user/-',
-    appleApiUrl: 'http://localhost:3000/oauth2/1'
+    appleApiUrl: 'http://localhost:3000/oauth2/1',
+    geoApi: 'https://www.googleapis.com/geolocation/v1/geolocate',
+    mapKey: 'AIzaSyBCVJPfwKSgIrz0VWZDL6LNUWMK7M6oR_w'
 };
 
 

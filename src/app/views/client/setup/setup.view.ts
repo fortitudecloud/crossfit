@@ -42,15 +42,29 @@ export class SetupViewComponent implements OnInit {
     }
 
     getUserAndForward(tokens: IUserAuth) {
+        let forward = (user) => {
+            // set localstorage and navigate
+            localStorage.setItem('user', JSON.stringify(user));
+            this.router.navigateByUrl('/home');
+        };
+
         this.healthProvider.getUserInfo(tokens).subscribe(user => {
-            // create new user
-            this.userStorage.add(user).subscribe(result => {
-                // set localstorage and navigate
-                localStorage.setItem('user', JSON.stringify(user));
-                this.router.navigateByUrl('/home');
-            }, (err) => {
-                this.router.navigateByUrl('/');
-            });            
+            // existing user?
+            this.userStorage.get(user.username).subscribe(resp => {
+                if(resp) {
+                    this.userStorage.update(user).subscribe(result => {
+                        forward(user);
+                    }, (err) => {
+                        this.router.navigateByUrl('/');
+                    });
+                } else {
+                    this.userStorage.add(user).subscribe(result => {
+                        forward(user);
+                    }, (err) => {
+                        this.router.navigateByUrl('/');
+                    });            
+                }
+            });
         });
     }
 

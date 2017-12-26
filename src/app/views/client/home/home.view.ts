@@ -17,6 +17,7 @@ import { UserStorage } from '../../../provider/storage/user.storage';
 import { AchievementsProvider } from '../../../provider/achievement.provider';
 import { Defaults } from '../../../provider/defaults.provider';
 import { environment } from '../../../../environments/environment';
+import { Geolocation } from '../../../provider/geolocation.provider';
 
 @Component({
     styleUrls: ['./home.view.scss'],
@@ -47,26 +48,29 @@ export class HomeViewComponent implements OnInit {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private defaults: Defaults,
-        public dialog: MatDialog) {  
+        public dialog: MatDialog,
+        private geolocation: Geolocation) {  
             this.position = this.testUser;            
             
-            navigator.geolocation.getCurrentPosition((pos) => {                
-                this.position = {
-                    lat: pos.coords.latitude,
-                    lng: pos.coords.longitude
-                };                
-            }, (err) => {
-                console.error(err)
-            }, {
-                timeout: 10000
-            });               
+            // navigator.geolocation.getCurrentPosition((pos) => {                
+            //     this.position = {
+            //         lat: pos.coords.latitude,
+            //         lng: pos.coords.longitude
+            //     };                
+            // }, (err) => {
+            //     console.error(err)
+            // }, {
+            //     timeout: 10000
+            // });               
             
-            this.watchLoc = navigator.geolocation.watchPosition((pos) => {
-                this.position = {
-                    lat: pos.coords.latitude,
-                    lng: pos.coords.longitude
-                };                
-            });
+            // this.watchLoc = navigator.geolocation.watchPosition((pos) => {
+            //     this.position = {
+            //         lat: pos.coords.latitude,
+            //         lng: pos.coords.longitude
+            //     };                
+            // });
+
+            this.geoLocate();
 
             this.map = this.defaults.TESTMAPS[0]; // replace with actual map
             this.map.origin = this.testUser; // replace          
@@ -85,7 +89,18 @@ export class HomeViewComponent implements OnInit {
         //         this.sync();
         //     }
         // });
-    }       
+    } 
+    
+    geoLocate() {
+        let loop = () => {
+            window.setTimeout(() => {
+                this.geolocation.getPosition().subscribe(pos => this.position = pos);
+                loop();                            
+            }, 5000);
+        };
+
+        loop();
+    }
 
     gotoCards() {
         this.viewGroup.selectedIndex = 3;
